@@ -16,7 +16,7 @@ services:
     #      do so here as this is a tutorial.
     environment:
       POSTGRES_PASSWORD: test
-      POSTGRES_DB: bookstore
+#      POSTGRES_DB: postgres
 
 
   adminer:
