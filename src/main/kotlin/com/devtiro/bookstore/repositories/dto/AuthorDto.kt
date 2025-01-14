@@ -11,4 +11,4 @@ data class AuthorDto(
     val description: String,
 
     val image: String
-)
+) 
