@@ -1,30 +1,24 @@
-package com.devtiro.bookstore.domain
+package com.devtiro.bookstore.domain.entities
 
-import jakarta.persistence.CascadeType
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.Table
+import jakarta.persistence.*
 
 @Entity
-@Table(name="books")
+@Table(name = "books")
 data class BookEntity(
     @Id
-    @Column(name="isbn")
+    @Column(name = "isbn")
     val isbn: String,
 
-    @Column(name="title")
+    @Column(name = "title")
     val title: String,
 
-    @Column(name="description")
+    @Column(name = "description")
     val description: String,
 
-    @Column(name="image")
+    @Column(name = "image")
     val image: String,
 
     @ManyToOne(cascade = [CascadeType.DETACH])
-    @JoinColumn(name="author_id")
+    @JoinColumn(name = "author_id")
     val authorEntity: AuthorEntity
 )

@@ -1,24 +1,24 @@
-package com.devtiro.bookstore.domain
+package com.devtiro.bookstore.domain.entities
 
 import jakarta.persistence.*
 
 @Entity
-@Table(name="authors")
+@Table(name = "authors")
 data class AuthorEntity(
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_id_seq")
     val id: Long?,
 
-    @Column(name="name")
+    @Column(name = "name")
     val name: String,
 
-    @Column(name="age")
+    @Column(name = "age")
     val age: Int,
 
-    @Column(name="description")
+    @Column(name = "description")
     val description: String,
 
-    @Column(name="image")
+    @Column(name = "image")
     val image: String
 )

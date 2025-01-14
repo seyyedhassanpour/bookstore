@@ -1,4 +1,4 @@
-import com.devtiro.bookstore.domain.AuthorEntity
+import com.devtiro.bookstore.domain.entities.AuthorEntity
 import com.devtiro.bookstore.dto.AuthorDto
 
 fun AuthorEntity.toAuthorDto() = AuthorDto(
