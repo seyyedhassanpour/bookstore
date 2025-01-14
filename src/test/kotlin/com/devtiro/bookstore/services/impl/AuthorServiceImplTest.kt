@@ -10,13 +10,13 @@ import org.springframework.data.repository.findByIdOrNull
 
 @SpringBootTest
 class AuthorServiceImplTest @Autowired constructor(
-    private val underTest: AuthorServiceImpl,
+    private val authorServiceImplementation: AuthorServiceImpl,
     private val authorRepository: AuthorRepository
 ) {
 
     @Test
     fun `test that save persists the Author in the database`() {
-        val savedAuthor = underTest.save(testAuthorEntityA())
+        val savedAuthor = authorServiceImplementation.save(testAuthorEntityA())
         assertThat(savedAuthor.id).isNotNull()
 
         val recalledAuthor = authorRepository.findByIdOrNull(savedAuthor.id!!)
@@ -29,7 +29,7 @@ class AuthorServiceImplTest @Autowired constructor(
 
     @Test
     fun `test that list returns empty list when no authors in the database`() {
-        val result = underTest.list()
+        val result = authorServiceImplementation.list()
         assertThat(result).isEmpty()
     }
 
@@ -44,9 +44,24 @@ class AuthorServiceImplTest @Autowired constructor(
     fun `test that list returns authors when authors present in the database`() {
         val savedAuthor = authorRepository.save(testAuthorEntityA())
         val expected = listOf(savedAuthor)
-        val result = underTest.list()
+        val result = authorServiceImplementation.list()
         assertThat(result).isEqualTo(expected)
     }
 
+
+    @Test
+//    fun `test that get returns null when author not found`() {
+    fun `test that get returns null when author not present in the database`() {
+        val result = authorServiceImplementation.get(999)
+        assertThat(result).isNull()
+    }
+
+    @Test
+//    fun `test that get returns author when author found`() {
+    fun `test that get returns author when author is present in the database`() {
+        val savedAuthor = authorRepository.save(testAuthorEntityA())
+        val result = authorServiceImplementation.get(savedAuthor.id!!)
+        assertThat(result).isEqualTo(savedAuthor)
+    }
 
 }

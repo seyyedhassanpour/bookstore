@@ -105,4 +105,39 @@ class AuthorsControllerTest @Autowired constructor(
             content { jsonPath("$[0].id", equalTo(1)) }
         }
     }
+
+    @Test
+    fun `test that get returns a http 404 when author is not found`() {
+        every {
+            authorService.get(any())
+        } answers {
+            null
+        }
+        mockMvc.get("$AUTHORS_BASE_URL/1") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isNotFound() }
+            content { string("") }
+        }
+    }
+
+    @Test
+    fun `test that get returns a http 200 when author is found`() {
+        every {
+            authorService.get(any())
+        } answers {
+            testAuthorEntityA(id = 999)
+        }
+
+        mockMvc.get("$AUTHORS_BASE_URL/999") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
+            content { jsonPath("$.id", equalTo(999)) }
+        }
+    }
+
+
 }
