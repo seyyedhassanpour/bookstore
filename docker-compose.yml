@@ -17,3 +17,10 @@ services:
     environment:
       POSTGRES_PASSWORD: test
       POSTGRES_DB: bookstore
+
+
+  adminer:
+    image: adminer:latest
+    restart: always
+    ports:
+      - 8888:8080
