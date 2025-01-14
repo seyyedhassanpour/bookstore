@@ -1,8 +1,8 @@
 package com.devtiro.bookstore.controllers
 
 import com.devtiro.bookstore.domain.AuthorEntity
-import com.devtiro.bookstore.dto.AuthorDto
 import com.devtiro.bookstore.services.AuthorService
+import com.devtiro.bookstore.testAuthorDtoA
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
@@ -40,16 +40,7 @@ class AuthorsControllerTest @Autowired constructor(
             contentType = MediaType.APPLICATION_JSON
             accept = MediaType.APPLICATION_JSON
             content = objectMapper.writeValueAsString(
-                (
-                        AuthorDto(
-                            id = null,
-                            name = "John Doe",
-                            age = 45,
-                            image = "https://example",
-                            description = "A description"
-
-                        )
-                        )
+                testAuthorDtoA()
             )
         }
         val expected = AuthorEntity(
@@ -69,16 +60,7 @@ class AuthorsControllerTest @Autowired constructor(
             contentType = MediaType.APPLICATION_JSON
             accept = MediaType.APPLICATION_JSON
             content = objectMapper.writeValueAsString(
-                (
-                        AuthorDto(
-                            id = null,
-                            name = "John Doe",
-                            age = 45,
-                            image = "https://example",
-                            description = "A description"
-
-                        )
-                        )
+                testAuthorDtoA()
             )
         }.andExpect {
             status { isCreated() }
