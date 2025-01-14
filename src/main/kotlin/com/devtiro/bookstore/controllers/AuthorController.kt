@@ -23,9 +23,8 @@ class AuthorController(private val authorService: AuthorService) {
     }
 
     @GetMapping
-    fun readManyAuthors(): ResponseEntity<List<AuthorDto>> = authorService.list()
+    fun readManyAuthors(): List<AuthorDto> = authorService.list()
         .map { it.toAuthorDto() }
-        .let { ResponseEntity(it, HttpStatus.OK) }
 
 
 }
